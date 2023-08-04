@@ -1,0 +1,29 @@
+@import "./../base/variables";
+
+.header__primary {
+  background-color: $red;
+  height: 40px;
+  width: 100%;
+  padding: 30px 0;
+  &.light {
+    background-color: $red;
+    color: $light-theme-text;
+  }
+
+  &.dark {
+    background-color: $dark-theme-background;
+    color: $dark-theme-text;
+  }
+  .container {
+    display: flex;
+    justify-content: space-between;
+    color: $light-text-color;
+    align-items: center;
+    .logo {
+      img {
+        width: 200px;
+        object-fit: contain;
+      }
+    }
+  }
+}

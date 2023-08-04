@@ -1,0 +1,23 @@
+// Importar los archivos de estilos base
+@import "./base/reset";
+@import "./base/variables";
+
+// Importar los archivos de estilos de layout
+@import "./base/typografy";
+@import "./base/layout";
+
+// Importar los archivos de estilos de pages
+@import "./pages/sellerDetail";
+
+// Importar los archivos de estilos de componentes
+@import "./components/header";
+@import "./components/sellerInfo";
+@import "./components/sellerItems";
+
+// Importar los archivos de estilos de utilidades
+
+// Definir variables de estilo y paletas de colores
+
+// Importar el archivo de estilos de tema, si existe
+
+// Exportar todos los estilos para su uso en la aplicación

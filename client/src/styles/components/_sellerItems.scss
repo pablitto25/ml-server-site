@@ -1,0 +1,39 @@
+@import "./../base/variables";
+
+.seller__items {
+  width: 75%;
+  @media screen and (max-width: $medium-screen) {
+    width: 100%;
+  }
+
+  table {
+    width: 100%;
+    text-align: left;
+    border-collapse: collapse;
+    caption {
+      h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        text-align: left;
+      }
+    }
+    th,
+    td {
+      border: 1px solid rgba(0,0,0,0.5);
+      padding: 0.5rem;
+    }
+    th{
+        font-weight: 600;
+    }
+    tbody {
+      tr {
+        &:nth-child(odd) {
+          background-color: #E0E0E0;
+        }
+        &:nth-child(even) {
+          background-color: #F5F5F5;
+        }
+      }
+    }
+  }
+}

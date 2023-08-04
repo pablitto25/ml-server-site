@@ -1,0 +1,35 @@
+@import "./../base/variables";
+
+.seller__info {
+  background-color: $light-gray;
+  width: 25%;
+  border-radius: 15px;
+  padding: 2rem;
+  @media screen and (max-width: $medium-screen) {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  h1 {
+    position: relative;
+    &::before {
+      content: "";
+      position: absolute;
+      height: 2.5rem;
+      top: 1rem;
+      left: -2rem;
+      border-left: 2px solid $red;
+    }
+  }
+  h3,
+  h4,
+  h5,
+  a {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+  }
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+}
