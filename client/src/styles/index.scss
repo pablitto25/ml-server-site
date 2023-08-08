@@ -7,12 +7,16 @@
 @import "./base/layout";
 
 // Importar los archivos de estilos de pages
+@import "./pages/homeSeller";
 @import "./pages/sellerDetail";
+
 
 // Importar los archivos de estilos de componentes
 @import "./components/header";
 @import "./components/sellerInfo";
 @import "./components/sellerItems";
+@import "./components/homeinfo";
+
 
 // Importar los archivos de estilos de utilidades
 

@@ -1,22 +1,20 @@
 import React from "react";
 import Header from "./../components/Header";
-import { Link } from "react-router-dom";
+/* import HomeInfo from "../components/HomeInfo"; */
+import Sellers from "../components/Sellers";
 
 const Home = () => {
   return (
     <>
       <Header />
-      <main className="container">
-        <section>
-          <h1>Home</h1>
-          <h3>
-            <Link to={"/sellers/1"}>Seller detail page</Link>
-          </h3>
-          <h3>
-            <Link to={"/dsadsa"}>Error page</Link>
-          </h3>
+      <div className="container">
+        <section className="home__sellers">
+          {/* <HomeInfo/> */}
+          <Sellers/> 
         </section>
-      </main>
+      </div>
+      
+      
     </>
   );
 };
