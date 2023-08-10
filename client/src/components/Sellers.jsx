@@ -4,48 +4,45 @@ import axios from 'axios'
 /* import { Link } from "react-router-dom"; */
 
 const URI = import.meta.env.VITE_API_ML_COUNTRY;
-const URI_TOP10 = import.meta.env.VITE_API_ML_SELLER_TOP10;
+const URI_ML = import.meta.env.VITE_API_ML_SELLER_TOP10;
 
 const Sellers = () => {
 
   const [country, setCountry] = useState([]);
-  const [top, setTop] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
-
+  const [marketplace, setMarketplace] = useState('');
 
   useEffect(() => {
-    getCountry()
-    getData()
-  }, []);
+  getCountry();
+  
+  if (searchTerm !== '') {
+    updateSearchResults();
+  } else {
+    setSearchResults([]);
+  }
+}, [searchTerm, marketplace]);
 
-  //Traer Paises
   const getCountry = async () => {
     const res = await axios.get(URI);
-    const res2 = await axios.get(URI_TOP10);
-    //filtrar de A-Z
     const sortedCountries = res.data.sort((a, b) => a.name.localeCompare(b.name));
     setCountry(sortedCountries);
-    setTop(res2.data);
   }
 
-  const getData = async () => {
-    const res = await axios.get(URI_TOP10);
-    //filtrar de A-Z
-    setTop(res.data);
-  }
+  const updateSearchResults = async () => {
+    try {
+      const searchUrl = `${URI_ML}/${encodeURIComponent(searchTerm)}%/${marketplace}`;
+      console.log(searchUrl);
+      const res = await axios.get(searchUrl);
+      const vendedores = res.data.vendedores;
+      const filteredResults = vendedores.sort((a, b) => a.nickname.localeCompare(b.nickname));
+      
+      setSearchResults(filteredResults);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    }
+  };
 
-  const handleSearchChange = (event) => {
-    const newSearchTerm = event.target.value;
-    setSearchTerm(newSearchTerm);
-    console.log(searchTerm);
-    // Filtrar los países basados en el término de búsqueda
-    const filteredCountries = top.filter(top => top.name.toLowerCase().includes(newSearchTerm.toLowerCase()));
-
-    // Limitar los resultados a 10
-    const limitedResults = filteredCountries.slice(0, 10);
-    setSearchResults(limitedResults);
-  }
 
   return (
     <div>
@@ -53,24 +50,16 @@ const Sellers = () => {
         <div>
           <label>Seleccionar: </label>
 
-          <select name="marketplaces" id="marketplace" defaultValue={"Argentina"}>
-            {country.map((country) => (
-              <option key={country.default_currency_id} value={country.id}>{country.name}</option>
+          <select name="marketplaces" id="marketplace" defaultValue={"Argentina"} onChange={(e) => setMarketplace(e.target.value)}>
+            {country.map((country_ML) => (
+              <option key={country_ML.default_currency_id} value={country_ML.id}>{country_ML.name}</option>
             ))}
           </select>
         </div>
         <div>
           <label>Buscar: </label>
-          <input type="search" className="search" onChange={handleSearchChange} value={searchTerm} />
-          {searchResults.length > 0 && (
-            <ul>
-              {searchResults.map(result => (
-                <li key={result.id}>{result.name}</li>
-              ))}
-            </ul>
-          )}
+          <input type="search" className="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
         </div>
-
       </div>
       <div>
         <table>
@@ -84,9 +73,11 @@ const Sellers = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Producto 1</td>
-            </tr>
+            {searchResults.map((result) => (
+              <tr key={result.id_vendedor}>
+                <td>{result.nickname}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
