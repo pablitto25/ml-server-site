@@ -1,11 +1,12 @@
 import React from "react";
 import { useState, useEffect } from 'react'
 import axios from 'axios'
-import '../../node_modules/bulma/css/bulma.min.css';
-/* import { Link } from "react-router-dom"; */
+import InfiniteScroll from "react-infinite-scroll-component";
+import { Link } from "react-router-dom";
 
 const URI = import.meta.env.VITE_API_ML_COUNTRY;
-const URI_ML = import.meta.env.VITE_API_ML_SELLER_TOP50;
+const URI_ML = import.meta.env.VITE_API_ML_VENDEDOR_TOP;
+const URI_V_TC = import.meta.env.VITE_API_ML_VENDEDOR_TOTALCOUNT;
 
 const Sellers = () => {
 
@@ -14,7 +15,8 @@ const Sellers = () => {
   const [searchResults, setSearchResults] = useState([]);
   const [marketplace, setMarketplace] = useState('MLA');
   const [page, setPage] = useState(1);
-  const [totalPages, setTotalPages] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [vendedoresTotalCount, setVendedoresTotalCount] = useState(0);
 
   useEffect(() => {
     getCountry();
@@ -35,27 +37,41 @@ const Sellers = () => {
         searchTerm
       )}%&_like1=${marketplace}`;
       console.log(searchUrl);
+      const vTotalCount = `${URI_V_TC}?_like1=${encodeURIComponent(
+        searchTerm
+      )}%&_like=${marketplace}`;
+
       const res = await axios.get(searchUrl);
+      const resTotalCount = await axios.get(vTotalCount);
+      
       const vendedores = res.data.vendedores;
+      const sortedVendedores = vendedores.sort((a, b) => a.nickname.localeCompare(b.nickname));
+      const totalCount = resTotalCount.data.vendedores_aggregate.aggregate.count;
+      
+      const totalPages = Math.ceil(totalCount / pageSize);
 
-      console.log(res.data.total_count);
+      setVendedoresTotalCount(totalCount);
+      setTotalPages(totalPages);
 
-      const filteredResults = vendedores.sort((a, b) => a.nickname.localeCompare(b.nickname));
-      setSearchResults(filteredResults);
-      setTotalPages(Math.ceil(res.data.total_count / pageSize));
+      if (page === 1) {
+        setSearchResults(sortedVendedores);
+      } else {
+        setSearchResults(prevResults => [...prevResults, ...sortedVendedores]);
+      }
     } catch (error) {
       console.error('Error al obtener los datos:', error);
     }
   };
-
-  const handlePagination = (newPage) => {
-    setPage(newPage);
+  const fetchMoreData = () => {
+    if (page < totalPages) {
+      setPage(page + 1);
+    }
   };
 
   return (
-    <div>
+    <div className="container-box">
       <div className="search__list">
-        <div>
+        <div className="select__container">
           <label>Seleccionar: </label>
 
           <select name="marketplaces" id="marketplace" defaultValue={"Argentina"} onChange={(e) => setMarketplace(e.target.value)}>
@@ -64,27 +80,12 @@ const Sellers = () => {
             ))}
           </select>
         </div>
-        <div>
+        <div className="searh_container">
           <label>Buscar: </label>
           <input type="search" className="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
         </div>
       </div>
       <div>
-      <div className="pagination is-centered">
-          <ul className="pagination-list">
-            {Array.from({ length: totalPages }, (_, index) => (
-              <li key={index}>
-                <a
-                  className={`pagination-link ${page === index + 1 ? 'is-current' : ''}`}
-                  aria-label={`Ir a la página ${index + 1}`}
-                  onClick={() => handlePagination(index + 1)}
-                >
-                  {index + 1}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
         <table>
           <caption>
             {" "}
@@ -96,11 +97,18 @@ const Sellers = () => {
             </tr>
           </thead>
           <tbody>
-            {searchResults.map((result) => (
-              <tr key={result.id_vendedor}>
-                <td>{result.nickname}</td>
-              </tr>
-            ))}
+          <InfiniteScroll
+              dataLength={searchResults.length}
+              next={fetchMoreData}
+              hasMore={searchResults.length < vendedoresTotalCount}
+              loader={<h4>Cargando...</h4>}
+            >
+              {searchResults.map((result) => (
+                <tr key={result.id_vendedor}>
+                  <td><Link to={`sellers/${marketplace}/${result.id_vendedor}`}>{result.nickname}</Link></td>
+                </tr>
+              ))}
+            </InfiniteScroll>
           </tbody>
         </table>
       </div>
