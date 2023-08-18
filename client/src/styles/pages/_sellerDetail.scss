@@ -3,6 +3,7 @@
 .seller__detail {
   display: flex;
   gap: 5%;
+  transition: $transition;
   &.dark{
     background-color: $dark-theme-primary-background;
   }

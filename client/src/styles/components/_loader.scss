@@ -1,3 +1,4 @@
+@import "./../base/variables";
 .loader__container {
   display: flex;
   justify-content: center;
@@ -9,8 +10,9 @@
     align-self: center;
     font-size: 2rem;
     color: #333;
-    &.dark{
-        color: $dark-theme-primary-text;
+    transition: $transition;
+    &.dark {
+      color: $dark-theme-primary-text;
     }
   }
 }
