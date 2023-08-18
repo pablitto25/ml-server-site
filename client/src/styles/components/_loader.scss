@@ -1,0 +1,22 @@
+.loader__container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
+  .spinner__icon {
+    animation: spin 1s infinite linear;
+    align-self: center;
+    font-size: 2rem;
+    color: #333;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

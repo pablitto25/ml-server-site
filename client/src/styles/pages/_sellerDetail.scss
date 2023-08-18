@@ -2,7 +2,7 @@
 
 .seller__detail {
   display: flex;
-  gap: 10%;
+  gap: 5%;
   @media screen and (max-width: $medium-screen) {
     flex-direction: column;
     overflow: hidden;
