@@ -5,7 +5,7 @@ import { ThemeContext } from "../Context/ThemeContext";
 const Loader = () => {
     const {theme} = useContext(ThemeContext)
   return (
-    <div className="loader__container">
+    <div className="container loader__container">
       <FaSpinner className={`spinner__icon ${theme}`} />
     </div>
   );
