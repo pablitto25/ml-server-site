@@ -6,6 +6,12 @@
   border-radius: 15px;
   padding: 2rem;
   height: max-content;
+  border: 3px solid transparent;
+  &.dark{
+    background-color: $dark-theme-secondary-background;
+    color: $dark-theme-primary-text;
+    border-color:$dark-theme-border;
+  }
   @media screen and (max-width: $medium-screen) {
     width: 100%;
     margin-bottom: 2rem;
@@ -48,7 +54,6 @@
     display: flex;
     gap: 1rem;
     margin: 1rem 0;
-    background-color: $light-gray;
     border-radius: 10px;
 
     .total__transactions, .last__transactions {

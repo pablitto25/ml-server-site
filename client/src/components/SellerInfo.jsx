@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FcBullish, FcClock, FcVoicePresentation } from "react-icons/fc";
+import { ThemeContext } from "../Context/ThemeContext";
+
+
 const SellerInfo = ({ seller }) => {
+  const { theme } = useContext(ThemeContext);
   const {
     id,
     nickname,
@@ -27,7 +31,7 @@ const SellerInfo = ({ seller }) => {
   };
 
   return (
-    <div className="seller__info">
+    <div className={`seller__info ${theme}`}>
       <div className="seller__logo">
         <img src={eshop.eshop_logo_url} alt={`logo ${nickname}`} />
       </div>

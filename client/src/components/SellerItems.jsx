@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import { FcRightUp } from "react-icons/fc";
+import { ThemeContext } from "../Context/ThemeContext";
 
 const SellerItems = ({ listings }) => {
+  const { theme } = useContext(ThemeContext);
   const getBrandValue = (attributes) => {
     const brandAttribute = attributes.find((attr) => attr.id === "BRAND");
     return brandAttribute ? brandAttribute.value_name : "N/A";
@@ -10,7 +12,7 @@ const SellerItems = ({ listings }) => {
 
   return (
     <div className="seller__items">
-      <table>
+      <table className={theme}>
         <caption>
           {" "}
           <h3>Publicaciones del vendedor</h3>

@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { ThemeContext } from "../Context/ThemeContext";
 import Header from "../components/Header";
+import Loader from "../components/Loader";
 import SellerInfo from "../components/SellerInfo";
 import SellerItems from "../components/SellerItems";
-import Loader from "../components/Loader";
-import { useParams } from "react-router-dom";
 
 const SellerDetail = () => {
   const { sellerId, marketplace } = useParams();
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
 
@@ -29,13 +31,13 @@ const SellerDetail = () => {
 
       const allItems = accumulatedItems.concat(responseData.results);
 
-      // Si hay más items por cargar, hacemos otra llamada a la API con el offset actualizado.
+      // Si hay más listings para cargar, hacemos otra llamada a la API con el offset actualizado.
       if (responseData.paging && responseData.paging.total > offset + 50) {
         return fetchAllItems(offset + 50, allItems);
       } else {
         return {
           seller: responseData.seller, // Retornamos datos del vendedor
-          results: allItems, // Retornamos todos los items
+          results: allItems, // Retornamos todos los listings
         };
       }
     } catch (err) {
@@ -54,9 +56,9 @@ const SellerDetail = () => {
   return (
     <>
       <Header />
-      <main>
+      <main className={theme}>
         <div className="container">
-          <section className="seller__detail">
+          <section className={`seller__detail ${theme}`}>
             {data ? (
               <>
                 <SellerInfo seller={data.seller} />
