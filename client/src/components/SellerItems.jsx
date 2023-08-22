@@ -24,7 +24,6 @@ const SellerItems = ({ listings }) => {
             <th>Producto</th>
             <th>Precio</th>
             <th>Cantidad vendida</th>
-            <th>Link</th>
           </tr>
         </thead>
         <tbody>
@@ -37,11 +36,6 @@ const SellerItems = ({ listings }) => {
               <td>{listing.title}</td>
               <td>{`$${listing.price}`}</td>
               <td>{listing.sold_quantity}</td>
-              <td className="cta">
-                <Link to={listing.permalink} target="_blank">
-                  <FcRightUp />
-                </Link>
-              </td>
             </tr>
           ))}
         </tbody>
