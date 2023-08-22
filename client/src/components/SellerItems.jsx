@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+import { FcRightUp } from "react-icons/fc";
+import { ThemeContext } from "../Context/ThemeContext";
 
-const SellerItems = () => {
+const SellerItems = ({ listings }) => {
+  const { theme } = useContext(ThemeContext);
+  const getBrandValue = (attributes) => {
+    const brandAttribute = attributes.find((attr) => attr.id === "BRAND");
+    return brandAttribute ? brandAttribute.value_name : "N/A";
+  };
+
   return (
     <div className="seller__items">
-      <table>
+      <table className={theme}>
         <caption>
           {" "}
           <h3>Publicaciones del vendedor</h3>
@@ -12,39 +20,24 @@ const SellerItems = () => {
         <thead>
           <tr>
             <th>Imagen</th>
+            <th>Marca</th>
             <th>Producto</th>
             <th>Precio</th>
-            <th>Rating</th>
-            <th>Link</th>
+            <th>Cantidad vendida</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td>
-              <img src="" alt="" />
-            </td>
-            <td>Producto 1</td>
-            <td>$150</td>
-            <td>3.5</td>
-            <td>
-              <Link to={"/"} target="_blank">
-                Link
-              </Link>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <img src="" alt="" />
-            </td>
-            <td>Producto 1</td>
-            <td>$150</td>
-            <td>3.5</td>
-            <td>
-              <Link to={"/"} target="_blank">
-                Link
-              </Link>
-            </td>
-          </tr>
+          {listings.map((listing) => (
+            <tr key={listing.id}>
+              <td>
+                <img src={listing.thumbnail} alt="" />
+              </td>
+              <td>{getBrandValue(listing.attributes)}</td>
+              <td>{listing.title}</td>
+              <td>{`$${listing.price}`}</td>
+              <td>{listing.sold_quantity}</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

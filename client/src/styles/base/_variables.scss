@@ -1,9 +1,6 @@
 $red: #ff0000;
 $black: #000000;
 $white: #ffffff;
-$ligth-gray: #f8f8f8;
-$primary-text-color: $black;
-$ligth-text-color: $white;
 $light-gray: #f8f8f8;
 
 // Colores de texto y fondo para el tema claro
@@ -11,8 +8,11 @@ $light-theme-background: $white;
 $light-theme-text: $black;
 
 // Colores de texto y fondo para el tema oscuro
-$dark-theme-background: $black;
-$dark-theme-text: $white;
+$dark-theme-primary-background: #181818;
+$dark-theme-secondary-background: #232323;
+$dark-theme-primary-text: #eaeaea;
+$dark-theme-secondary-text: #B2B2B2;
+$dark-theme-border: #333333;
 
 // Color de texto principal
 $primary-text-color: $black;

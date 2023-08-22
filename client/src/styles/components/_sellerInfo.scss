@@ -5,6 +5,13 @@
   width: 25%;
   border-radius: 15px;
   padding: 2rem;
+  height: max-content;
+  border: 3px solid transparent;
+  &.dark{
+    background-color: $dark-theme-secondary-background;
+    color: $dark-theme-primary-text;
+    border-color:$dark-theme-border;
+  }
   @media screen and (max-width: $medium-screen) {
     width: 100%;
     margin-bottom: 2rem;
@@ -28,8 +35,63 @@
     gap: 12px;
     align-items: center;
   }
+  h4 {
+    font-size: 1.4rem;
+  }
   a {
     text-decoration: none;
     color: inherit;
+  }
+  .seller__logo{
+    display: flex;
+    justify-content: center;
+    img{
+      object-fit: contain;
+      width: 200px;
+    }
+  }
+  .transactions__section {
+    display: flex;
+    gap: 1rem;
+    margin: 1rem 0;
+    border-radius: 10px;
+
+    .total__transactions, .last__transactions {
+      font-size: 1.5rem;
+      font-weight: bold;
+      align-self: center;
+    }
+
+    .candles {
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      .candle {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        font-size: 0.8rem;
+
+        .candle__bar {
+          height: 20px;
+          margin-right: 0.2rem;
+          transition: width 0.3s ease;
+
+          &.completed {
+            background-color: green;
+          }
+          &.claim {
+            background-color: yellow;
+          }
+
+          &.time {
+            background-color: darkorange;
+          }
+          &.canceled {
+            background-color: red;
+          }
+        }
+      }
+    }
   }
 }

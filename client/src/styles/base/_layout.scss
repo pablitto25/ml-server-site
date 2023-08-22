@@ -35,12 +35,12 @@ body {
     font-size: 2.5rem;
   }
   section {
-    margin-top: 4rem;
+    padding-top: 4rem;
     @media screen and (max-width: $medium-screen) {
-      margin-top: 2rem;
+      padding-top: 2rem;
     }
     @media screen and (max-width: $small-screen) {
-      margin-bottom: 1rem;
+      padding-bottom: 1rem;
     }
   }
   a {
@@ -53,9 +53,14 @@ body {
   }
 
   main {
+    min-height: 100vh;
     &.light {
       background-color: $light-theme-background;
       color: $light-theme-text;
+    }
+    &.dark {
+      background-color: $dark-theme-primary-background;
+      color: $dark-theme-primary-text;
     }
   }
 }

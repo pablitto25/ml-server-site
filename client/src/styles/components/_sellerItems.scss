@@ -1,7 +1,7 @@
 @import "./../base/variables";
 
 .seller__items {
-  width: 75%;
+  width: 70%;
   @media screen and (max-width: $medium-screen) {
     width: 100%;
   }
@@ -10,6 +10,22 @@
     width: 100%;
     text-align: left;
     border-collapse: collapse;
+    &.dark {
+      th,
+      td {
+        border-color: $dark-theme-border;
+      }
+      tbody {
+        tr {
+          &:nth-child(odd) {
+            background-color: #151515;
+          }
+          &:nth-child(even) {
+            background-color: #1f1f1f;
+          }
+        }
+      }
+    }
     caption {
       h3 {
         font-size: 1.5rem;
@@ -19,19 +35,26 @@
     }
     th,
     td {
-      border: 1px solid rgba(0,0,0,0.5);
+      border: 1px solid rgba(0, 0, 0, 0.5);
       padding: 0.5rem;
     }
-    th{
-        font-weight: 600;
+    th {
+      font-weight: 600;
     }
     tbody {
       tr {
+        td {
+          vertical-align: middle;
+          display: table-cell;
+          &.cta {
+            text-align: center;
+          }
+        }
         &:nth-child(odd) {
-          background-color: #E0E0E0;
+          background-color: #e0e0e0;
         }
         &:nth-child(even) {
-          background-color: #F5F5F5;
+          background-color: #f5f5f5;
         }
       }
     }

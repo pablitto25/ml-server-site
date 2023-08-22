@@ -13,7 +13,7 @@ const ErrorPage = () => {
             <Link to={"/"}>Home</Link>
           </h3>
           <h3>
-            <Link to={"/sellers/1"}>Seller detail page</Link>
+            <Link to={"/sellers/MLA/23742253"}>Seller detail page</Link>
           </h3>
         </section>
       </main>
