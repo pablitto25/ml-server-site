@@ -3,9 +3,8 @@
 .home{
     display: flex;
     justify-content: center;
-    align-items: center;
     background-color: $light-gray;
-
+    min-height: 100vh;
 
     &.dark{
         background-color: $dark-theme-primary-background;

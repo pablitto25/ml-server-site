@@ -28,7 +28,6 @@ const SellerDetail = () => {
         throw new Error("Network response was not ok");
       }
       const responseData = await response.json();
-
       const allItems = accumulatedItems.concat(responseData.results);
 
       // Si hay más listings para cargar, hacemos otra llamada a la API con el offset actualizado.

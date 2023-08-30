@@ -30,7 +30,7 @@ const SellerItems = ({ listings }) => {
           {listings.map((listing) => (
             <tr key={listing.id}>
               <td>
-                <img src={listing.thumbnail} alt="" />
+                <Link to ={listing.permalink} target="_blank"><img src={listing.thumbnail} alt="" /></Link>
               </td>
               <td>{getBrandValue(listing.attributes)}</td>
               <td>{listing.title}</td>

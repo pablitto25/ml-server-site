@@ -38,7 +38,6 @@ const Sellers = () => {
       const searchUrl = `${URI_ML}?offset=${offset}&limit=${pageSize}&_like=${encodeURIComponent(
         searchTerm
       )}%&_like1=${marketplace}`;
-      console.log(searchUrl);
       const vTotalCount = `${URI_V_TC}?_like1=${encodeURIComponent(
         searchTerm
       )}%&_like=${marketplace}`;
