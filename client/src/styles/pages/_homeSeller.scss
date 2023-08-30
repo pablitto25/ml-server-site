@@ -1,5 +1,18 @@
 @import "./../base/variables";
 
+.home{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $light-gray;
+
+
+    &.dark{
+        background-color: $dark-theme-primary-background;
+        color: $dark-theme-primary-text;
+        border-color:$dark-theme-border;
+      }
+}
 .home__sellers{
     display: flex;
     gap: 10%;

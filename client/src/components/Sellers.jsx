@@ -1,15 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../Context/ThemeContext";
+
 
 const URI = import.meta.env.VITE_API_ML_COUNTRY;
 const URI_ML = import.meta.env.VITE_API_ML_VENDEDOR_TOP;
 const URI_V_TC = import.meta.env.VITE_API_ML_VENDEDOR_TOTALCOUNT;
 
 const Sellers = () => {
-
+  const { theme } = useContext(ThemeContext);
   const [country, setCountry] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -67,14 +69,14 @@ const Sellers = () => {
       setPage(page + 1);
     }
   };
-
+  
   return (
-    <div className="container-box">
+    <div className={`container-box ${theme}`}>
       <div className="search__list">
         <div className="select__container">
           <label>Seleccionar: </label>
 
-          <select name="marketplaces" id="marketplace" defaultValue={"Argentina"} onChange={(e) => setMarketplace(e.target.value)}>
+          <select name="marketplaces" className={`marketplace ${theme}`} defaultValue={"Argentina"} onChange={(e) => setMarketplace(e.target.value)}>
             {country.map((country_ML) => (
               <option key={country_ML.default_currency_id} value={country_ML.id}>{country_ML.name}</option>
             ))}
@@ -82,11 +84,11 @@ const Sellers = () => {
         </div>
         <div className="searh_container">
           <label>Buscar: </label>
-          <input type="search" className="search" value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
+          <input type="search" className={`search ${theme}`} value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)} />
         </div>
       </div>
       <div>
-        <table>
+        <table className={theme}>
           <caption>
             {" "}
             <h3>Sellers</h3>

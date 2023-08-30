@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import { FcBullish, FcClock, FcVoicePresentation } from "react-icons/fc";
 import { ThemeContext } from "../Context/ThemeContext";
 
-
 const SellerInfo = ({ seller }) => {
+  const logo_default = "/seller-default-logo.png";
   const { theme } = useContext(ThemeContext);
   const {
     id,
@@ -33,7 +33,7 @@ const SellerInfo = ({ seller }) => {
   return (
     <div className={`seller__info ${theme}`}>
       <div className="seller__logo">
-        <img src={eshop.eshop_logo_url} alt={`logo ${nickname}`} />
+        <img src={eshop?.eshop_logo_url || logo_default} alt={`logo ${nickname}`} />
       </div>
       <h1>{nickname}</h1>
       <div>
