@@ -1,10 +1,8 @@
-import React, { useContext } from "react";
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useContext, useState, useEffect } from "react";
+import axios from 'axios';
 import InfiniteScroll from "react-infinite-scroll-component";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../Context/ThemeContext";
-
 
 const URI = import.meta.env.VITE_API_ML_COUNTRY;
 const URI_ML = import.meta.env.VITE_API_ML_VENDEDOR_TOP;
@@ -12,7 +10,7 @@ const URI_V_TC = import.meta.env.VITE_API_ML_VENDEDOR_TOTALCOUNT;
 
 const Sellers = () => {
   const { theme } = useContext(ThemeContext);
-  const [country, setCountry] = useState([]);
+  const [countrySeller, setCountrySeller] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [marketplace, setMarketplace] = useState('MLA');
@@ -28,7 +26,7 @@ const Sellers = () => {
   const getCountry = async () => {
     const res = await axios.get(URI);
     const sortedCountries = res.data.sort((a, b) => a.name.localeCompare(b.name));
-    setCountry(sortedCountries);
+    setCountrySeller(sortedCountries);
   };
 
   const loadPageData = async () => {
@@ -63,12 +61,13 @@ const Sellers = () => {
       console.error('Error al obtener los datos:', error);
     }
   };
+
   const fetchMoreData = () => {
     if (page < totalPages) {
       setPage(page + 1);
     }
   };
-  
+
   return (
     <div className={`container-box ${theme}`}>
       <div className="search__list">
@@ -76,8 +75,8 @@ const Sellers = () => {
           <label>Seleccionar: </label>
 
           <select name="marketplaces" className={`marketplace ${theme}`} defaultValue={"Argentina"} onChange={(e) => setMarketplace(e.target.value)}>
-            {country.map((country_ML) => (
-              <option key={country_ML.default_currency_id} value={country_ML.id}>{country_ML.name}</option>
+            {countrySeller.map((country_ML_Sellers) => (
+              <option key={country_ML_Sellers.default_currency_id} value={country_ML_Sellers.id}>{country_ML_Sellers.name}</option>
             ))}
           </select>
         </div>
@@ -90,11 +89,11 @@ const Sellers = () => {
         <table className={theme}>
           <caption>
             {" "}
-            <h3>Sellers</h3>
+            <h3></h3>
           </caption>
           <thead>
             <tr>
-              <th>Clientes</th>
+              <th>Sellers: </th>
             </tr>
           </thead>
           <tbody>

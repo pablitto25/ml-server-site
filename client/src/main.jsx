@@ -7,12 +7,14 @@ import SellerDetail from "./pages/SellerDetail";
 import ErrorPage from "./pages/ErrorPage";
 
 import "./styles/index.scss";
+import SellerBusqueda from "./pages/SellersBusqueraEspecifica";
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/busqueda" element={<SellerBusqueda/>}/>
         <Route path="sellers/:marketplace/:sellerId" element={<SellerDetail />} />
         <Route path="*" element={<ErrorPage />} />
       </Routes>
